@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:bookworm-slim
+
+    steps:
+      - checkout
+
+      - run:
+          name: Greeting
+          command: echo Hello, world.
+
+      - run:
+          name: Print the Current Time
+          command: date
+
+  shellcheck:
+    docker:
+      - image: koalaman/shellcheck-alpine:stable
+
+    steps:
+      - checkout
+
+      - run:
+          name: Run ShellCheck on alert_rec.sh
+          command: shellcheck monitor-shell-chinachu/shell/alert_rec.sh
+
+workflows:
+  version: 2
+  build_and_lint:
+    jobs:
+      - build
+      - shellcheck
