@@ -1,5 +1,7 @@
 # rec-server-alert
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/enprocode/rec-server-alert/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/enprocode/rec-server-alert/tree/main)
+
 録画サーバー監視・アラート関連のスクリプト集。用途・技術スタックの異なる3つの独立したプロジェクトが含まれる。
 
 ## プロジェクト一覧
