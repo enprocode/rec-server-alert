@@ -1,0 +1,15 @@
+version: 2
+updates:
+  # monitor-prometheus-grafana/docker-compose.yml で使っている
+  # prometheus / grafana / alertmanager のイメージ更新を検知する
+  - package-ecosystem: "docker"
+    directory: "/monitor-prometheus-grafana"
+    schedule:
+      interval: "weekly"
+
+  # monitor-prometheus-grafana/target_config/docker-compose.yml で使っている
+  # node-exporter のイメージ更新を検知する
+  - package-ecosystem: "docker"
+    directory: "/monitor-prometheus-grafana/target_config"
+    schedule:
+      interval: "weekly"

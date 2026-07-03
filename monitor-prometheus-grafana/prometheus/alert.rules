@@ -1,0 +1,11 @@
+groups:
+  - name: example.com
+    rules:
+      - alert: instance_down
+        expr: up == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          firing_text: "[{{ $labels.env }}] {{ $labels.instance }} has been down for more than 5 minutes."
+          resolved_text: "[{{ $labels.env }}] {{ $labels.instance }} has recovered."

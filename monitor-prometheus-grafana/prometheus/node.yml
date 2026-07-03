@@ -1,0 +1,5 @@
+- labels:
+    env: development
+  targets:
+    - pve2-rec:9100
+    #- example03.com:9100
