@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Greeting
+        run: echo Hello, world.
+
+      - name: Print the Current Time
+        run: date
+
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run ShellCheck on alert_rec.sh
+        run: shellcheck monitor-shell-chinachu/shell/alert_rec.sh
+
+  json-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          for f in monitor-sensu-epgstation/json/*.json monitor-sensu-epgstation/json/*.json.example; do
+            echo "checking $f"
+            jq empty "$f"
+          done
+
+  erb-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+
+      - name: Validate ERB template syntax
+        run: |
+          for f in monitor-sensu-epgstation/slack_payload/*.erb; do
+            echo "checking $f"
+            erb -x -T - "$f" | ruby -c
+          done
+
+  docker-compose-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate docker-compose.yml files
+        run: |
+          cp monitor-prometheus-grafana/grafana/grafana.secret.env.example \
+             monitor-prometheus-grafana/grafana/grafana.secret.env
+          docker compose -f monitor-prometheus-grafana/docker-compose.yml config >/dev/null
+          docker compose -f monitor-prometheus-grafana/target_config/docker-compose.yml config >/dev/null
+          rm monitor-prometheus-grafana/grafana/grafana.secret.env
+
+  prometheus-config-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate prometheus.yml and alert.rules
+        run: |
+          docker run --rm \
+            -v "$PWD/monitor-prometheus-grafana/prometheus:/etc/prometheus" \
+            --entrypoint /bin/sh \
+            prom/prometheus:v3.12.0 \
+            -c "promtool check config /etc/prometheus/prometheus.yml && promtool check rules /etc/prometheus/alert.rules"

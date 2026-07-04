@@ -11,7 +11,7 @@
 | ファイル | 役割 |
 |---|---|
 | `shell/alert_rec.sh` | ログ監視 + Slack通知本体のスクリプト |
-| `/.circleci/config.yml`（リポジトリルート） | CI設定。`alert_rec.sh` の ShellCheck 等（CircleCI はリポジトリルートの `.circleci/config.yml` しか自動検出しないため、このプロジェクト単体ではなくリポジトリ直下に配置） |
+| `/.github/workflows/ci.yml`（リポジトリルート） | CI設定。`alert_rec.sh` の ShellCheck 等（GitHub Actions はリポジトリルートの `.github/workflows/` しか自動検出しないため、このプロジェクト単体ではなくリポジトリ直下に配置） |
 | `.gitignore` | `.env` / `.log` を除外 |
 
 ## セットアップ

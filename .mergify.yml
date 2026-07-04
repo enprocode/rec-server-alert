@@ -3,12 +3,12 @@ pull_request_rules:
     conditions:
       - author=dependabot[bot]
       - base=main
-      - "check-success=ci/circleci: build"
-      - "check-success=ci/circleci: shellcheck"
-      - "check-success=ci/circleci: json-lint"
-      - "check-success=ci/circleci: erb-lint"
-      - "check-success=ci/circleci: docker-compose-validate"
-      - "check-success=ci/circleci: prometheus-config-check"
+      - "check-success=CI / build"
+      - "check-success=CI / shellcheck"
+      - "check-success=CI / json-lint"
+      - "check-success=CI / erb-lint"
+      - "check-success=CI / docker-compose-validate"
+      - "check-success=CI / prometheus-config-check"
     actions:
       merge:
         method: squash
