@@ -54,12 +54,10 @@ function notify_if_matched() {
   slack "$color" "$status_label" "$last_log"
 }
 
-## RECORDLOG
 function record() {
   notify_if_matched "RECORD" "RECORD" "#dc143c"
 }
 
-## FIN
 function fin() {
   notify_if_matched "FIN" "FIN" "good"
 }
