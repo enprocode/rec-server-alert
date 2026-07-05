@@ -1,6 +1,7 @@
 # rec-server-alert
 
 [![CI](https://github.com/enprocode/rec-server-alert/actions/workflows/ci.yml/badge.svg)](https://github.com/enprocode/rec-server-alert/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 録画サーバー監視・アラート関連のスクリプト集。用途・技術スタックの異なる3つの独立したプロジェクトが含まれる。
 
