@@ -12,12 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Greeting
-        run: echo Hello, world.
-
-      - name: Print the Current Time
-        run: date
-
   shellcheck:
     runs-on: ubuntu-latest
     steps:
